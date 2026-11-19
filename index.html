@@ -51,14 +51,14 @@ p{max-width:62ch}
 .hero .phone{position:absolute;right:28px;bottom:-40px;width:150px;border-radius:22px;border:4px solid #1a1f1d}
 
 /* Le projet */
-.intro{display:grid;grid-template-columns:1.35fr 1fr;gap:14px}
-.intro .panel{padding:26px 28px}
+.intro{display:grid;grid-template-columns:1fr 1.2fr;gap:14px}
+.intro .panel{padding:26px 28px;display:flex;flex-direction:column}
 .intro p{margin-top:10px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:auto!important;gap:10px;margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
 .stat b{display:block;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
 .stat span{font-size:13px;color:var(--mut);display:block;margin-top:5px;line-height:1.35}
 .corpus{display:flex;flex-direction:column;gap:10px}
-.corpus img{width:100%;max-height:260px;object-fit:contain;margin:0 auto}
+.corpus img{width:100%;flex:1;min-height:0;max-height:380px;object-fit:contain;margin:0 auto}
 .bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
 .bar i{display:block;height:100%;width:33%;background:var(--acc)}
 .corpus .t{display:flex;justify-content:space-between;font-size:13px;color:var(--mut)}
@@ -137,11 +137,11 @@ p{max-width:62ch}
   .hero{grid-template-columns:1fr 1.15fr;min-height:0;height:300px}
   .hero .vis{order:0}
   .hero .txt{padding:28px 32px}
-  .intro{grid-template-columns:1.35fr 1fr}
+  .intro{grid-template-columns:1fr 1.2fr}
   .intro .panel{padding:20px 24px}
-  .corpus img{max-height:170px}
+  .corpus img{max-height:255px}
   .bento{grid-template-columns:repeat(3,1fr);gap:12px}
-  .card .shot{height:150px}
+  .card .shot{height:132px}
   .card .cap{padding:11px 16px 13px}
   .collab{grid-template-columns:.9fr 1.2fr;padding:22px 26px}
   .steps{gap:9px;margin-top:14px}
