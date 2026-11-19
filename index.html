@@ -7,182 +7,146 @@
 <meta name="description" content="Les mappes sardes de 1730 géoréférencées, en 3D et sur téléphone : comparer, explorer, contribuer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Panneaux arrondis posés sur un fond lichen. Vert forêt (le site), ocre papier (les mappes), bleu GPS (la géolocalisation).
    Mise en page : un grand panneau 3D en ouverture, puis une grille de panneaux de tailles variées. */
 :root{
-  --bg:#e9ece6; --panel:#ffffff; --ink:#16201c; --mut:#5b6762; --line:#dfe3dc;
-  --forest:#24493f; --forest-2:#2f5d50; --ochre:#c98a2b; --ochre-lt:#f6ead3; --gps:#2f7be0;
-  --display:"Bricolage Grotesque","Geist",Helvetica,Arial,sans-serif;
-  --body:"Geist",Helvetica,Arial,sans-serif;
-  --r:24px; --r-sm:16px;
+  --bg:#f2f3f1; --panel:#ffffff; --ink:#1a1f1d; --mut:#646d69; --line:#e2e5e1;
+  --acc:#3d6357; --acc-lt:#eef3f0;
+  --f:"Geist",Helvetica,Arial,sans-serif;
+  --r:18px; --r-sm:12px;
   color-scheme:light;
 }
+/* Sobre : panneaux blancs arrondis sur fond gris très clair, un seul accent vert, une seule police. */
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--bg)}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--gps);outline-offset:3px}
-.page{max-width:1200px;margin:0 auto;padding:20px 20px 40px;display:grid;gap:16px}
-.panel{background:var(--panel);border-radius:var(--r);overflow:hidden;position:relative}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;letter-spacing:-.02em;line-height:1.02}
-h2{font-size:clamp(28px,3.4vw,40px);font-weight:800}
-h3{font-size:20px;font-weight:600;letter-spacing:-.01em;line-height:1.15}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.page{max-width:1120px;margin:0 auto;padding:24px 20px 40px;display:grid;gap:14px}
+.panel{background:var(--panel);border-radius:var(--r);overflow:hidden;position:relative;border:1px solid var(--line)}
+h1,h2,h3{font-weight:600;text-wrap:balance;letter-spacing:-.02em;line-height:1.1}
+h2{font-size:clamp(22px,2.4vw,27px)}
+h3{font-size:17px;letter-spacing:-.01em;line-height:1.25}
 p{max-width:62ch}
-.kicker{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:10px}
+.kicker{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:8px}
 .mut{color:var(--mut)}
 .num{font-variant-numeric:tabular-nums}
 
-/* ===== Ouverture ===== */
-.hero{min-height:560px;color:#fff;background:#1b2a24;isolation:isolate;display:grid;grid-template-columns:1.25fr .75fr;align-items:end}
-.hero>.bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(14,24,20,.88) 0%,rgba(14,24,20,.6) 42%,rgba(14,24,20,.05) 75%),linear-gradient(0deg,rgba(14,24,20,.55),transparent 45%)}
-.hero .txt{padding:48px 44px}
-.hero .kicker{color:#f1c477}
-.hero h1{font-size:clamp(46px,7.2vw,92px);font-weight:800;letter-spacing:-.045em;line-height:.9}
-.hero .lead{font-size:clamp(17px,1.8vw,21px);line-height:1.4;margin-top:18px;max-width:30ch;color:rgba(255,255,255,.92)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-.chip{background:rgba(255,255,255,.14);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 14px;font-size:14px}
-.chip b{font-weight:600;font-variant-numeric:tabular-nums}
-.hero .phone{justify-self:center;align-self:end;width:210px;margin:40px 0 -70px;border-radius:30px;border:6px solid #0f1714;box-shadow:0 30px 60px rgba(0,0,0,.45)}
-.hero .by{position:absolute;right:20px;top:16px;font-size:12px;color:rgba(255,255,255,.75);background:rgba(0,0,0,.25);padding:4px 10px;border-radius:999px}
+/* Ouverture : texte à gauche, image à droite */
+.hero{display:grid;grid-template-columns:1fr 1.15fr;min-height:400px;background:#526e65;border-color:#526e65;color:#fff}
+.hero .kicker,.hero .by{color:rgba(255,255,255,.75)!important}
+.hero .lead,.hero .facts{color:rgba(255,255,255,.88)!important}
+.hero .facts b{color:#fff!important}
+.hero .txt{padding:40px 38px;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:clamp(40px,5vw,58px);letter-spacing:-.04em;line-height:1}
+.hero .lead{font-size:18px;line-height:1.45;margin-top:14px;color:var(--mut);max-width:34ch}
+.hero .facts{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:14px;color:var(--mut)}
+.hero .facts b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.hero .by{font-size:13px;color:var(--mut);margin-top:26px}
+.hero .vis{position:relative;min-height:300px}
+.hero .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .phone{position:absolute;right:28px;bottom:-40px;width:150px;border-radius:22px;border:4px solid #1a1f1d}
 
-/* ===== Le projet ===== */
-.intro{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}
-.intro .panel{padding:30px 32px}
-.intro p{margin-top:12px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
-.stat{background:var(--ochre-lt);border-radius:var(--r-sm);padding:14px 16px}
-.stat b{display:block;font-family:var(--display);font-size:32px;font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
-.stat span{font-size:13px;color:var(--mut);display:block;margin-top:4px;line-height:1.3}
+/* Le projet */
+.intro{display:grid;grid-template-columns:1.35fr 1fr;gap:14px}
+.intro .panel{padding:26px 28px}
+.intro p{margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
+.stat b{display:block;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--mut);display:block;margin-top:5px;line-height:1.35}
 .corpus{display:flex;flex-direction:column;gap:10px}
-.corpus img{width:100%;max-height:280px;object-fit:contain;margin:0 auto}
-.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
-.bar i{display:block;height:100%;width:33%;background:var(--forest-2);border-radius:99px}
+.corpus img{width:100%;max-height:260px;object-fit:contain;margin:0 auto}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:33%;background:var(--acc)}
 .corpus .t{display:flex;justify-content:space-between;font-size:13px;color:var(--mut)}
-.corpus .t b{color:var(--ink)}
+.corpus .t b{color:var(--ink);font-weight:500}
 .leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mut)}
-.leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}
 
-/* ===== Fonctionnalités : grille de panneaux ===== */
-.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:18px 6px 2px}
-.sec-head p{font-size:15px;color:var(--mut);max-width:44ch}
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+/* Fonctionnalités */
+.sec-head{padding:14px 4px 0}
+.sec-head p{display:none}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .card{display:flex;flex-direction:column}
-.card .shot{flex:1;min-height:0;background:#f1f3ef}
+.card .shot{height:200px;background:#f4f5f3;border-bottom:1px solid var(--line)}
 .card .shot img{width:100%;height:100%;object-fit:cover}
-.card .cap{padding:16px 20px 20px}
-.card .cap p{font-size:14.5px;color:var(--mut);margin-top:5px;line-height:1.45}
-.tagline{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:99px;background:var(--ochre-lt);color:#8a5a12;margin-bottom:8px}
-.c-compare{grid-column:span 2;grid-row:span 2}
-.c-pano{grid-column:span 4}
-.c-terrain{grid-column:span 2;grid-row:span 2;background:var(--forest);color:#fff}
-.c-terrain .cap p{color:rgba(255,255,255,.8)}
-.c-terrain .tagline{background:rgba(255,255,255,.15);color:#fff}
-.c-terrain .shot{background:none;display:flex;justify-content:center;padding:22px 20px 0}
-.c-terrain .shot img{width:auto;height:100%;max-height:360px;object-fit:contain;border-radius:22px;border:5px solid #0f1714}
-.c-maquette{grid-column:span 2}
-.c-maquette .shot{background:#eceeeb}
+.card .cap{padding:14px 18px 18px}
+.card .cap p{font-size:14px;color:var(--mut);margin-top:4px;line-height:1.45}
+.tagline{display:block;font-size:12px;font-weight:500;color:var(--acc);margin-bottom:4px}
+.c-terrain .shot{display:flex;justify-content:center;padding:14px 0 0}
+.c-terrain .shot img{width:auto;height:100%;object-fit:contain;border-radius:14px 14px 0 0;border:3px solid #1a1f1d;border-bottom:0}
 .c-maquette .shot img{object-fit:contain}
-.c-fiche{grid-column:span 3}
-.c-patri{grid-column:span 3}
-.c-compare .shot{min-height:300px}
-.c-pano .shot{height:230px;flex:none}
-.c-maquette .shot{height:190px;flex:none}
-.c-fiche .shot,.c-patri .shot{height:220px;flex:none}
 .c-fiche .shot img{object-position:center 20%}
 .c-patri .shot img{object-position:left top}
+.c-compare .shot img{object-position:center 40%}
 
-/* ===== Collaboratif ===== */
-.collab{background:var(--forest);color:#fff;padding:34px 34px 30px;display:grid;grid-template-columns:1fr 1.15fr;gap:30px;align-items:start}
-.collab .kicker{color:#f1c477}
-.collab h2{color:#fff}
-.collab>div>p{color:rgba(255,255,255,.85);margin-top:12px}
-.steps{list-style:none;display:grid;gap:10px;margin-top:22px;counter-reset:s}
-.steps li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-sm);padding:12px 14px;counter-increment:s;font-size:14.5px;line-height:1.4;color:rgba(255,255,255,.85)}
-.steps li::before{content:counter(s);width:34px;height:34px;border-radius:50%;background:#f1c477;color:var(--forest);font-family:var(--display);font-weight:800;display:grid;place-items:center;font-size:17px}
-.steps b{color:#fff;display:block;font-weight:600}
-.collab-vis{display:grid;gap:12px}
-.collab-vis .shot{border-radius:var(--r-sm);overflow:hidden;background:#fff}
-.collab-vis figcaption{font-size:13px;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:10px;margin-top:8px}
-.collab-vis figcaption img{width:22px;height:22px;background:#fff;border-radius:6px;padding:2px}
-.annot{border:1.5px dashed rgba(255,255,255,.35);border-radius:var(--r-sm);padding:16px 18px}
-.annot h3{font-size:17px;color:#fff}
-.annot p{font-size:14px;color:rgba(255,255,255,.8);margin-top:4px}
+/* Collaboratif */
+.collab{background:var(--acc-lt);border-color:#dbe6e0;padding:28px 30px;display:grid;grid-template-columns:.9fr 1.2fr;gap:28px;align-items:start}
+.collab>div>p{color:var(--mut);margin-top:10px}
+.steps{list-style:none;display:grid;gap:12px;margin-top:20px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;counter-increment:s;font-size:14.5px;line-height:1.45;color:var(--mut)}
+.steps li::before{content:counter(s);width:26px;height:26px;border-radius:50%;border:1.5px solid var(--acc);color:var(--acc);font-weight:600;display:grid;place-items:center;font-size:13px}
+.steps b{color:var(--ink);display:block;font-weight:600}
+.collab-vis{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.collab-vis .shot{aspect-ratio:4/3;border-radius:var(--r-sm);overflow:hidden;background:#fff;border:1px solid #dbe6e0}
+.collab-vis figcaption{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:8px;margin-top:8px}
+.collab-vis .shot img{width:100%;height:100%;object-fit:cover;object-position:left top}
+.collab-vis figcaption img{width:16px;height:16px;flex:none}
+.collab-vis figcaption{align-items:flex-start;line-height:1.4}
+.annot{background:#fff;border:1px solid #dbe6e0;border-radius:var(--r-sm);padding:14px 16px}
+.annot h3{font-size:15px}
+.annot p{font-size:14px;color:var(--mut);margin-top:3px}
 
-/* ===== Pied ===== */
-.foot{padding:24px 30px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+/* Pied */
+.foot{padding:20px 26px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
 .foot p{font-size:13px;color:var(--mut);max-width:80ch}
-.foot .who{font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);margin-bottom:4px}
-.btns{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font:600 15px var(--body);border:0;cursor:pointer}
-.btn:hover{background:var(--forest-2)}
-.btn.sec{background:none;color:var(--ink);border:1.5px solid var(--ink)}
+.foot .who{font-weight:600;font-size:15px;color:var(--ink);margin-bottom:3px}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;padding:11px 16px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font:500 14px var(--f);border:0;cursor:pointer}
+.btn:hover{background:var(--acc)}
+.btn.sec{background:none;color:var(--ink);border:1px solid var(--ink)}
 .btn.sec:hover{background:var(--bg)}
 
-/* ===== Écrans étroits ===== */
 @media (max-width:900px){
-  .hero{grid-template-columns:1fr;min-height:0}
+  .hero{grid-template-columns:1fr}
+  .hero .vis{order:-1;min-height:260px}
   .hero .phone{display:none}
-  .hero .txt{padding:110px 26px 32px}
   .intro,.collab{grid-template-columns:1fr}
-  .bento{grid-template-columns:repeat(2,1fr)}
-  .c-compare,.c-terrain{grid-row:auto}
-  .c-pano,.c-fiche,.c-patri{grid-column:span 2}
-  .c-compare,.c-terrain,.c-maquette{grid-column:span 1}
-  .c-compare .shot{min-height:260px}
-  .c-terrain .shot img{max-height:300px}
-  .sec-head{flex-direction:column;align-items:start}
+  .bento{grid-template-columns:1fr 1fr}
   .foot{grid-template-columns:1fr}
 }
 @media (max-width:560px){
   .page{padding:12px 12px 30px;gap:12px}
   .bento{grid-template-columns:1fr}
-  .c-pano,.c-fiche,.c-patri,.c-compare,.c-terrain,.c-maquette{grid-column:auto}
-  .stats{grid-template-columns:1fr 1fr 1fr;gap:6px}
-  .stat{padding:10px}
-  .stat b{font-size:24px}
-  .intro .panel,.collab{padding:22px 20px}
+  .hero .txt,.intro .panel,.collab{padding:22px 20px}
+  .stat b{font-size:22px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* ===== Impression : une page A4, mise en page ordinateur réduite ===== */
-@page{size:A4 portrait;margin:8mm}
+/* ===== Impression : une page A4 ===== */
+@page{size:A4 portrait;margin:9mm}
 @media print{
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   html,body{background:#fff}
-  body{width:1340px;zoom:.545;margin:0}
+  body{width:1240px;zoom:.57;margin:0}
   .page{padding:0;gap:12px;max-width:none}
-  .no-print,.sec-head p{display:none!important}
-  .panel{border:1.5px solid var(--line)}
-  .hero,.collab{border:0}
-  .hero{min-height:0;height:300px;grid-template-columns:1.25fr .75fr}
-  .hero .txt{padding:30px 38px}
-  .hero .phone{display:block;width:150px;margin:24px 0 -90px}
-  .hero h1{font-size:76px}
-  .hero .lead{margin-top:12px}
-  .chips{margin-top:16px}
-  .intro{grid-template-columns:1.35fr 1fr;gap:12px}
+  .no-print{display:none!important}
+  .hero{grid-template-columns:1fr 1.15fr;min-height:0;height:300px}
+  .hero .vis{order:0}
+  .hero .txt{padding:28px 32px}
+  .intro{grid-template-columns:1.35fr 1fr}
   .intro .panel{padding:20px 24px}
-  .stats{margin-top:14px}
-  .corpus img{max-height:175px}
-  .sec-head{padding:2px 6px 0;display:block}
+  .corpus img{max-height:170px}
   .bento{grid-template-columns:repeat(3,1fr);gap:12px}
-  .bento .card{grid-column:auto!important;grid-row:auto!important}
-  .bento .card .shot{flex:none;height:138px;min-height:0;padding:0}
-  .c-terrain .shot{padding:10px 0 0!important}
-  .c-terrain .shot img{max-height:128px;border-width:3px;border-radius:12px}
-  .c-compare .shot img{object-position:center 40%}
+  .card .shot{height:150px}
   .card .cap{padding:11px 16px 13px}
-  .card .cap p{font-size:13.5px}
-  .collab{grid-template-columns:1fr 1fr;padding:22px 26px;gap:22px}
-  .steps{gap:7px;margin-top:12px}
-  .steps li{padding:9px 12px}
-  .collab-vis .shot img{max-height:200px;width:100%;object-fit:cover;object-position:left top}
+  .collab{grid-template-columns:.9fr 1.2fr;padding:22px 26px}
+  .steps{gap:9px;margin-top:14px}
   .foot{grid-template-columns:1fr;padding:14px 22px}
-  .panel,.card,.collab{break-inside:avoid}
+  .panel,.card{break-inside:avoid}
 }
 </style>
 </head>
@@ -190,20 +154,16 @@ p{max-width:62ch}
 <main class="page">
 
   <header class="panel hero">
-    <img class="bgimg" src="assets/hero_3d.jpg" alt="Une mappe sarde drapée sur le relief des Alpes, vue en 3D">
-    <span class="by">Charles Bastide-Fouque · 2026</span>
     <div class="txt">
       <span class="kicker">Cadastre sarde · Haute-Savoie et Genève</span>
       <h1>Mapper l'histoire</h1>
-      <p class="lead">Les plans de 1730 posés sur le relief d'aujourd'hui. À explorer en 3D, sur le terrain ou depuis son canapé.</p>
-      <div class="chips">
-        <span class="chip"><b>132</b> mappes</span>
-        <span class="chip"><b>1 958</b> km²</span>
-        <span class="chip"><b>118</b> paroisses</span>
-        <span class="chip">Ordinateur et téléphone</span>
-      </div>
+      <p class="lead">Les plans cadastraux de 1730 posés sur le territoire d'aujourd'hui, à explorer en 3D, sur le terrain ou depuis chez soi.</p>
+      <div class="facts"><span><b>132</b> mappes</span><span><b>118</b> paroisses</span><span><b>1 958</b> km²</span></div>
+      <div class="by">Charles Bastide-Fouque · 2026</div>
     </div>
-    <img class="phone" src="assets/tel_3d.jpg" alt="Le site en 3D sur un téléphone">
+    <div class="vis">
+      <img class="bgimg" src="assets/hero_3d.jpg" alt="Une mappe sarde drapée sur le relief des Alpes, vue en 3D">
+    </div>
   </header>
 
   <div class="intro">
@@ -228,7 +188,7 @@ p{max-width:62ch}
   </div>
 
   <div class="sec-head">
-    <div><span class="kicker">Ce que permet le site</span><h2>Voyager dans le temps, sans rien installer</h2></div>
+    <div><span class="kicker">Ce que permet le site</span><h2>Voyager dans le temps, sur ordinateur ou téléphone</h2></div>
     <p>Une carte web qui marche aussi sur téléphone et s'ajoute à l'écran d'accueil comme une application.</p>
   </div>
 
@@ -268,22 +228,22 @@ p{max-width:62ch}
     <div>
       <span class="kicker">Collaboratif</span>
       <h2>Une carte qui s'améliore avec ses visiteurs</h2>
-      <p>Une mappe mal calée, un détail à signaler, une feuille pas encore traitée ? Chacun peut contribuer. Les propositions sont vérifiées avant d'être intégrées.</p>
+      <p>Chacun peut enrichir la carte : ajouter une annotation sur un lieu, ou améliorer le calage d'une mappe.</p>
       <ol class="steps">
-        <li><div><b>Repérer</b>Dans la fiche d'une mappe, le bouton « Améliorer le géoréférencement » ouvre l'image d'archives.</div></li>
-        <li><div><b>Placer des points dans Allmaps</b>L'outil libre relie un point de la mappe à sa position actuelle, directement dans le navigateur.</div></li>
-        <li><div><b>Vérifier et intégrer</b>La contribution est contrôlée, puis rejoint la carte de tous.</div></li>
+        <li><div><b>Annoter un lieu</b>Un point sur la carte, un titre, une image : une gravure, une photo, une source.</div></li>
+        <li><div><b>Améliorer une mappe</b>Depuis sa fiche, le bouton « Améliorer le géoréférencement » ouvre l'image d'archives dans Allmaps.</div></li>
+        <li><div><b>Vérifier et intégrer</b>Les calages proposés sont contrôlés, puis rejoignent la carte de tous.</div></li>
       </ol>
     </div>
     <div class="collab-vis">
       <figure>
-        <div class="shot"><img src="assets/allmaps.jpg" alt="L'éditeur Allmaps : points de calage sur la mappe et sur la carte actuelle"></div>
-        <figcaption><img src="assets/allmaps-logo.svg" alt="">Géoréférencer dans Allmaps, l'outil ouvert du patrimoine cartographique</figcaption>
+        <div class="shot"><img style="object-position:center 45%" src="assets/annotation.jpg" alt="Annotation « Ancienne chartreuse de Ripaille » avec une gravure ancienne, posée sur la carte en 3D"></div>
+        <figcaption>Annoter : un lieu, un titre, une image, directement sur la carte.</figcaption>
       </figure>
-      <div class="annot">
-        <h3>Annoter la carte</h3>
-        <p>Les annotations permettent de laisser une note sur un lieu et de la partager : un nom ancien, une source, une erreur repérée.</p>
-      </div>
+      <figure>
+        <div class="shot"><img src="assets/allmaps.jpg" alt="L'éditeur Allmaps : points de calage sur la mappe et sur la carte actuelle"></div>
+        <figcaption><img src="assets/allmaps-logo.svg" alt="">Géoréférencer dans Allmaps, l'outil libre de géoréférencement en ligne.</figcaption>
+      </figure>
     </div>
   </section>
 
